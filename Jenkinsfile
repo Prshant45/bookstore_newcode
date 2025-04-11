@@ -13,12 +13,12 @@ pipeline {
             }
         }
 
-        stage('Build Docker Image') {
-            steps {
-                sh 'pwd'
-                sh 'docker-compose build'
-            }
-        }
+        // stage('Build Docker Image') {
+        //     steps {
+        //         sh 'pwd'
+        //         sh 'docker-compose build'
+        //     }
+        // }
 
         stage('Run Tests') {
             steps {
