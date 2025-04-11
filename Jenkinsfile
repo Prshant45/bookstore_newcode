@@ -3,7 +3,7 @@ pipeline {
 
     environment {
         DJANGO_SETTINGS_MODULE = "bookstore.settings"
-        PATH = "/opt/homebrew/bin:$PATH"
+        PATH = "/usr/local/bin:$PATH"
     }
 
     stages {
@@ -13,23 +13,20 @@ pipeline {
             }
         }
 
-        // stage('Build Docker Image') {
-        //     steps {
-        //         sh 'pwd'
-        //         sh 'docker-compose build'
-        //     }
-        // }
-
-        stage('Run Tests') {
+        stage('Build') {
             steps {
-                // If tests fail, this will stop the pipeline
+                sh 'docker-compose build'
+            }
+        }
+
+        stage('Test') {
+            steps {
                 sh 'docker-compose run --rm web python manage.py test'
             }
         }
 
-        stage('Deploy App') {
+        stage('Deploy') {
             steps {
-                sh 'docker-compose down'
                 sh 'docker-compose up -d'
             }
         }
