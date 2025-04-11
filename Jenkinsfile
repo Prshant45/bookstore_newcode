@@ -3,6 +3,7 @@ pipeline {
 
     environment {
         DJANGO_SETTINGS_MODULE = "bookstore.settings"
+        PATH = "/opt/homebrew/bin:$PATH"
     }
 
     stages {
