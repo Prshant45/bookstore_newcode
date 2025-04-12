@@ -40,3 +40,11 @@ class AddCart(View):
         print(request.session['cart'])
         books = Books.objects.all()
         return render(request, 'home.html', {'books': books})
+
+class ShowCart(View):
+    def post(self, request):
+        if not request.user.is_authenticated:
+            return redirect('login')
+        if 'cart' not in request.session:
+            return render(request, 'cart.html', {'cart': []})
+        return render(request, 'cart.html', {'cart': request.session['cart']})

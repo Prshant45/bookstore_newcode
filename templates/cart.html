@@ -1,0 +1,26 @@
+<html>
+<head>
+    {% load static %}
+    <title>Cart</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'style.css' %}">
+    <body>
+        Cart
+        <form method="POST" action="{% url 'add_to_cart' %}">
+            {% csrf_token %}
+            {% if user.is_authenticated %}
+                <p>Welcome, {{ user.username }}!</p>
+            {% endif %}
+            <table border="1">
+            {% for ele in cart %}
+                <tr>
+                    <td><p>Ele: {{ ele }}</p></td>
+                </tr>
+            {% endfor %}
+            </table>
+        </form>
+        
+        {% if error %}
+            <p style="color: red;">{{ error }}</p>
+        {% endif %}
+    </body>
+</html>
